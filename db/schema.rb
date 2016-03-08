@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307011941) do
+ActiveRecord::Schema.define(version: 20160307130933) do
 
   create_table "microposts", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,16 +34,7 @@ ActiveRecord::Schema.define(version: 20160307011941) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "location"
-    t.string   "introduction"
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+# Could not dump table "users" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
 end
