@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 before_action :collect_user, only: [:edit, :update]
+before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+                                        :following, :followers]
 
   def show
     @user = User.find(params[:id])
@@ -36,6 +38,20 @@ before_action :collect_user, only: [:edit, :update]
     end
   end
   
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following_users
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.follower_users
+    render 'show_follow'
+  end
+
   private
  
   def collect_user
@@ -46,6 +62,4 @@ before_action :collect_user, only: [:edit, :update]
   def user_params
     params.require(:user).permit(:name, :email, :location, :introduction, :password,:password_comfirmation)
   end
-  
-  
 end
